@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getSignupFormData, handleSignupSubmit } from '@/actions/auth/signUp';
+import { getSignupFormData, handleSignupSubmit } from '@/actions/auth/signup';
 import { getLoginFormData, handleLoginSubmit } from '@/actions/auth/login';
 
 import { IAttributes } from 'oneentry/dist/base/utils';
@@ -60,7 +60,7 @@ const searchParams = useSearchParams();
     fetchData()
       .then((data) => setFormData(data))
 
-      .catch((err) => setError('Failed to load form data. Please try again.'))
+      .catch(() => setError('Failed to load form data. Please try again.'))
 
       .finally(() => setIsLoading(false));
   }, [isSignUp]);
@@ -157,7 +157,7 @@ const searchParams = useSearchParams();
             </div>
           ) : (
             <form className='space-y-4 sm:space-y-6' onSubmit={handleSubmit}>
-              {formData.map((field: any) => (
+              {formData.map((field: IAttributes) => (
                 <div key={field.marker}>
                   <Label
                     htmlFor={field.marker}

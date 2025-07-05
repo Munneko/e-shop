@@ -4,19 +4,7 @@ import { IAttributes } from 'oneentry/dist/base/utils';
 import { fetchApiClient } from '@/lib/oneentry';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-
-export function isErrorWithMessage(
-  error: unknown
-): error is { message: string; statusCode?: number } {
-  if (
-    typeof error !== 'object' ||
-    error === null ||
-    !('message' in error)
-  ) {
-    return false;
-  }
-  return typeof (error as Record<string, unknown>).message === 'string';
-}
+import { isErrorWithMessage } from '@/lib/utils';
 
 interface IErroredResponse {
   statusCode: number;
@@ -26,7 +14,7 @@ interface IErroredResponse {
 export const getLoginFormData = async (): Promise<IAttributes[]> => {
   try {
     const apiClient = await fetchApiClient();
-    const response = await apiClient?.Forms.getFormByMarker('sign-in', 'en_US');
+    const response = await apiClient?.Forms.getFormByMarker('sign_in', 'en_US');
     return response?.attributes as unknown as IAttributes[];
   } catch (error: unknown) {
     if (isErrorWithMessage(error)) {

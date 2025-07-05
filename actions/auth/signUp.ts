@@ -9,7 +9,7 @@ export const getSignupFormData = async (): Promise<IAttributes[]> => {
   try {
     const apiClient = await fetchApiClient();
 
-    const response = await apiClient?.Forms.getFormByMarker('sign-up', 'en_US');
+    const response = await apiClient?.Forms.getFormByMarker('sign_up', 'en_US');
 
     return response?.attributes as unknown as IAttributes[];
   } catch (error: unknown) {
@@ -32,7 +32,7 @@ export const handleSignupSubmit = async (inputValues: {
     const apiClient = await fetchApiClient();
 
     const data: ISignUpData = {
-      formIdentifier: 'sign-up',
+      formIdentifier: 'sign_up',
       authData: [
         { marker: 'email', value: inputValues.email },
         { marker: 'password', value: inputValues.password },
