@@ -1,10 +1,10 @@
-'use server';
+"use server";
 
-import { IAttributes } from 'oneentry/dist/base/utils';
-import { fetchApiClient } from '@/lib/oneentry';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { isErrorWithMessage } from '@/lib/utils';
+import { IAttributes } from "oneentry/dist/base/utils";
+import { fetchApiClient } from "@/lib/oneentry";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { isErrorWithMessage } from "@/lib/utils";
 
 interface IErroredResponse {
   statusCode: number;
@@ -14,15 +14,15 @@ interface IErroredResponse {
 export const getLoginFormData = async (): Promise<IAttributes[]> => {
   try {
     const apiClient = await fetchApiClient();
-    const response = await apiClient?.Forms.getFormByMarker('sign_in', 'en_US');
+    const response = await apiClient?.Forms.getFormByMarker("sign_in", "en_US");
     return response?.attributes as unknown as IAttributes[];
   } catch (error: unknown) {
     if (isErrorWithMessage(error)) {
-      console.error('Fetching form data error:', error.message);
+      console.error("Fetching form data error:", error.message);
     } else {
-      console.error('Unknown fetching form data error:', error);
+      console.error("Unknown fetching form data error:", error);
     }
-    throw new Error('Fetching form data failed.');
+    throw new Error("Fetching form data failed.");
   }
 };
 
@@ -35,12 +35,12 @@ export const handleLoginSubmit = async (inputValues: {
 
     const data = {
       authData: [
-        { marker: 'email', value: inputValues.email },
-        { marker: 'password', value: inputValues.password },
+        { marker: "email", value: inputValues.email },
+        { marker: "password", value: inputValues.password },
       ],
     };
 
-    const response = await apiClient?.AuthProvider.auth('email', data);
+    const response = await apiClient?.AuthProvider.auth("email", data);
 
     if (!response?.userIdentifier) {
       const error = response as unknown as IErroredResponse;
@@ -51,11 +51,11 @@ export const handleLoginSubmit = async (inputValues: {
 
     const cookieStore = await cookies();
 
-    cookieStore.set('access_token', response.accessToken, {
+    cookieStore.set("access_token", response.accessToken, {
       maxAge: 60 * 60 * 24,
     });
 
-    cookieStore.set('refresh_token', response.refreshToken, {
+    cookieStore.set("refresh_token", response.refreshToken, {
       maxAge: 60 * 60 * 24 * 7,
     });
   } catch (error: unknown) {
@@ -63,9 +63,9 @@ export const handleLoginSubmit = async (inputValues: {
       return { message: error.message };
     }
 
-    console.error('Login error:', error);
-    throw new Error('Failed to login. Please try again.');
+    console.error("Login error:", error);
+    throw new Error("Failed to login. Please try again.");
   }
 
-  redirect('/');
+  redirect("/");
 };

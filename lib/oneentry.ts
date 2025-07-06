@@ -1,62 +1,47 @@
-import { defineOneEntry } from 'oneentry';
+import { defineOneEntry } from "oneentry";
 
-import retrieveRefreshToken from '@/actions/auth/retrieveRefreshToken';
+import retrieveRefreshToken from "@/actions/auth/retrieveRefreshToken";
 
-import storeRefreshToken from '@/actions/auth/storeRefreshToken';
+import storeRefreshToken from "@/actions/auth/storeRefreshToken";
 
 export type ApiClientType = ReturnType<typeof defineOneEntry> | null;
 
 let apiClient: ApiClientType = null;
 
 async function setupApiClient(): Promise<ReturnType<typeof defineOneEntry>> {
-
   const apiUrl = process.env.ONEENTRY_URL;
 
-
-
   if (!apiUrl) {
-    throw new Error('ONEENTRY_URL is missing');
+    throw new Error("ONEENTRY_URL is missing");
   }
-
-
 
   if (!apiClient) {
     try {
-
-
       const refreshToken = await retrieveRefreshToken();
 
- 
-
       apiClient = defineOneEntry(apiUrl, {
-        token: process.env.ONENETRY_TOKEN, 
+        token: process.env.ONENETRY_TOKEN,
 
-        langCode: 'en_US', 
+        langCode: "en_US",
 
         auth: {
-          refreshToken: refreshToken || undefined, 
+          refreshToken: refreshToken || undefined,
 
-          customAuth: false, 
+          customAuth: false,
 
           saveFunction: async (newToken: string) => {
-
-
             await storeRefreshToken(newToken);
           },
         },
       });
     } catch (error) {
-  
-
-      console.error('Error fetching refresh token:', error);
+      console.error("Error fetching refresh token:", error);
     }
   }
 
-
   if (!apiClient) {
-    throw new Error('Failed to initialize API client');
+    throw new Error("Failed to initialize API client");
   }
-
 
   return apiClient;
 }
@@ -64,15 +49,12 @@ async function setupApiClient(): Promise<ReturnType<typeof defineOneEntry>> {
 export async function fetchApiClient(): Promise<
   ReturnType<typeof defineOneEntry>
 > {
-
   if (!apiClient) {
-
     await setupApiClient();
   }
 
-
   if (!apiClient) {
-    throw new Error('API client is still null after setup');
+    throw new Error("API client is still null after setup");
   }
 
   return apiClient;

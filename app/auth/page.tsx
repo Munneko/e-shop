@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, useEffect, FormEvent  } from "react";
+import { useState, useEffect, FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getSignupFormData, handleSignupSubmit } from '@/actions/auth/signup';
-import { getLoginFormData, handleLoginSubmit } from '@/actions/auth/login';
+import { getSignupFormData, handleSignupSubmit } from "@/actions/auth/signup";
+import { getLoginFormData, handleLoginSubmit } from "@/actions/auth/login";
 
-import { IAttributes } from 'oneentry/dist/base/utils';
+import { IAttributes } from "oneentry/dist/base/utils";
 
 interface SignUpFormData {
   email: string;
@@ -30,7 +30,7 @@ interface LoginFormData {
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true);
   const router = useRouter();
-const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
   const [formData, setFormData] = useState<IAttributes[]>([]);
 
@@ -42,12 +42,12 @@ const searchParams = useSearchParams();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [error, setError] = useState<string | null>('Not valid');
+  const [error, setError] = useState<string | null>("Not valid");
 
   useEffect(() => {
-    const type = searchParams.get('type');
+    const type = searchParams.get("type");
 
-    setIsSignUp(type !== 'login');
+    setIsSignUp(type !== "login");
   }, [searchParams]);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const searchParams = useSearchParams();
     fetchData()
       .then((data) => setFormData(data))
 
-      .catch(() => setError('Failed to load form data. Please try again.'))
+      .catch(() => setError("Failed to load form data. Please try again."))
 
       .finally(() => setIsLoading(false));
   }, [isSignUp]);
@@ -85,13 +85,13 @@ const searchParams = useSearchParams();
             inputValues as SignUpFormData
           );
 
-          if ('identifier' in response) {
+          if ("identifier" in response) {
             setInputValues({});
 
             setIsSignUp(false);
 
-            toast('User has been created', {
-              description: 'Please enter your credentials to log in.',
+            toast("User has been created", {
+              description: "Please enter your credentials to log in.",
 
               duration: 5000,
             });
@@ -99,7 +99,7 @@ const searchParams = useSearchParams();
             setError(response.message);
           }
         } else {
-          setError('Please fill out all required fields.');
+          setError("Please fill out all required fields.");
         }
       } else {
         if (inputValues.email && inputValues.password) {
@@ -111,14 +111,14 @@ const searchParams = useSearchParams();
             setError(response.message);
           }
         } else {
-          setError('Please fill out all required fields.');
+          setError("Please fill out all required fields.");
         }
       }
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : 'An error occurred. Please try again.'
+          : "An error occurred. Please try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -151,30 +151,30 @@ const searchParams = useSearchParams();
               ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida ullamcorper diam, ac ultrices diam auctor eu. Integer viverra nulla vitae lectus volutpat porta. Aliquam erat volutpat. "
               : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
           </p>
-           {isLoading ? (
-            <div className='flex justify-center items-center h-64'>
-              <Loader2 className='h-8 w-8 animate-spin text-purple-500' />
+          {isLoading ? (
+            <div className="flex justify-center items-center h-64">
+              <Loader2 className="h-8 w-8 animate-spin text-purple-500" />
             </div>
           ) : (
-            <form className='space-y-4 sm:space-y-6' onSubmit={handleSubmit}>
+            <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
               {formData.map((field: IAttributes) => (
                 <div key={field.marker}>
                   <Label
                     htmlFor={field.marker}
-                    className='text-base sm:text-lg text-gray-400 mb-1 sm:mb-2 block'
+                    className="text-base sm:text-lg text-gray-400 mb-1 sm:mb-2 block"
                   >
                     {field.localizeInfos.title}
                   </Label>
 
                   <Input
                     id={field.marker}
-                    type={field.marker === 'password' ? 'password' : 'text'}
+                    type={field.marker === "password" ? "password" : "text"}
                     name={field.marker}
-                    className=' text-base sm:text-lg p-4 sm:p-6'
+                    className=" text-base sm:text-lg p-4 sm:p-6"
                     placeholder={field.localizeInfos.title}
                     value={
                       inputValues[field.marker as keyof typeof inputValues] ||
-                      ''
+                      ""
                     }
                     onChange={handleInputChange}
                     disabled={isSubmitting}
@@ -183,22 +183,22 @@ const searchParams = useSearchParams();
               ))}
 
               {error && (
-                <div className='text-red-500 text mt-2 text-center'>
+                <div className="text-red-500 text mt-2 text-center">
                   {error}
                 </div>
               )}
 
               <div>
                 <Button
-                  className='w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white text-base sm:text-xl font-bold p-4 sm:p-6 rounded-md shadow-xl transition-colors duration-300 ease-in-out cursor-pointer'
+                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white text-base sm:text-xl font-bold p-4 sm:p-6 rounded-md shadow-xl transition-colors duration-300 ease-in-out cursor-pointer"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    <Loader2 className='h-5 w-5 sm:h-6 sm:w-6 animate-spin' />
+                    <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 animate-spin" />
                   ) : isSignUp ? (
-                    'Sign Up'
+                    "Sign Up"
                   ) : (
-                    'Sign In'
+                    "Sign In"
                   )}
                 </Button>
               </div>
