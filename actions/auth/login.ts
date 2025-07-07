@@ -15,12 +15,13 @@ export const getLoginFormData = async (): Promise<IAttributes[]> => {
   try {
     const apiClient = await fetchApiClient();
     const response = await apiClient?.Forms.getFormByMarker("sign_in", "en_US");
+    console.log("[Login] Form response:", response);
     return response?.attributes as unknown as IAttributes[];
   } catch (error: unknown) {
     if (isErrorWithMessage(error)) {
-      console.error("Fetching form data error:", error.message);
+      console.error("[Login] Fetching form data error:", error.message);
     } else {
-      console.error("Unknown fetching form data error:", error);
+      console.error("[Login] Unknown fetching form data error:", error);
     }
     throw new Error("Fetching form data failed.");
   }

@@ -8,17 +8,15 @@ import { isErrorWithMessage } from "@/lib/utils";
 export const getSignupFormData = async (): Promise<IAttributes[]> => {
   try {
     const apiClient = await fetchApiClient();
-
     const response = await apiClient?.Forms.getFormByMarker("sign_up", "en_US");
-
+    console.log("[Signup] Form response:", response);
     return response?.attributes as unknown as IAttributes[];
   } catch (error: unknown) {
     if (isErrorWithMessage(error)) {
-      console.error("Signup form fetch error:", error.message);
+      console.error("[Signup] Signup form fetch error:", error.message);
     } else {
-      console.error("Unknown error while fetching signup form:", error);
+      console.error("[Signup] Unknown error while fetching signup form:", error);
     }
-
     throw new Error("Fetching form data failed.");
   }
 };
