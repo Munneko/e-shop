@@ -15,7 +15,10 @@ export const getSignupFormData = async (): Promise<IAttributes[]> => {
     if (isErrorWithMessage(error)) {
       console.error("[Signup] Signup form fetch error:", error.message);
     } else {
-      console.error("[Signup] Unknown error while fetching signup form:", error);
+      console.error(
+        "[Signup] Unknown error while fetching signup form:",
+        error
+      );
     }
     throw new Error("Fetching form data failed.");
   }
