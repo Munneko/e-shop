@@ -7,5 +7,6 @@ export interface IProduct {
     p_price: { value: number };
     p_image: { value: { downloadLink: string } };
     p_title: { value: string };
+    p_price: { value: number };
   };
 }
