@@ -22,6 +22,11 @@ import useCartStore from "@/stores/cartStore";
 import getUserSession from "@/actions/auth/getUserSession";
 
 import { IUserEntity } from "oneentry/dist/users/usersInterfaces";
+
+import createOrder from "@/actions/orders/createOrder";
+
+import { IOrderData } from "oneentry/dist/orders/ordersInterfaces";
+
 import Image from "next/image";
 
 export default function CartPage() {
@@ -29,6 +34,7 @@ export default function CartPage() {
   const cartItems = useCartStore((state) => state.cart);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
+  const clearCart = useCartStore((state) => state.clearCart);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<IUserEntity | null>(null);
 
@@ -75,6 +81,28 @@ export default function CartPage() {
   );
   const discountAmount = subtotal * discount;
   const total = subtotal - discountAmount;
+
+  const createOrderAndCheckout = async () => {
+    const data: IOrderData = {
+      formData: [],
+
+      formIdentifier: "order_form",
+
+      paymentAccountIdentifier: "stripe",
+
+      products: cartItems.map((item) => ({
+        productId: item.id,
+
+        quantity: item.quantity,
+      })),
+    };
+
+    const url = await createOrder(data);
+
+    clearCart();
+
+    router.push(url);
+  };
 
   return (
     <div className="min-h-screen  p-4 sm:p-8">
@@ -214,6 +242,7 @@ export default function CartPage() {
                 <Button
                   className="w-full mt-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white font-semibold cursor-pointer"
                   disabled={!cartItems.length}
+                  onClick={createOrderAndCheckout}
                 >
                   <CreditCard className="mr-2 h-5 w-5" />
                   Proceed to Checkout
