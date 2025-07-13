@@ -24,11 +24,8 @@ export const getCatalogWithProducts = async () => {
 
         {
           limit: 4,
-
           offset: 0,
-
           sortOrder: null,
-
           sortKey: null,
         }
       );
