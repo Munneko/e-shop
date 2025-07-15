@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchApiClient } from "../lib/oneentry";
+import { fetchApiClient } from "../../lib/oneentry";
 
 export const getProductDetails = async (productId: number) => {
   const apiClient = await fetchApiClient();

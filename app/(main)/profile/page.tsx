@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 
 import { Package, DollarSign, Calendar } from 'lucide-react';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '../../../components/ui/avatar';
 
-import getUserSession from '@/actions/auth/getUserSession';
+import getUserSession from '../../../actions/auth/getUserSession';
 
-import { getOrder } from '@/actions/orders/getOrder';
+import { getOrder } from '../../../actions/orders/getOrder';
 
 import { IUserEntity } from 'oneentry/dist/users/usersInterfaces';
 
