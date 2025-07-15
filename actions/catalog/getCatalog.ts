@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchApiClient } from "@/lib/oneentry";
+import { fetchApiClient } from "../lib/oneentry";
 
 import { IPagesEntity } from "oneentry/dist/pages/pagesInterfaces";
 

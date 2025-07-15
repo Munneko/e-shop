@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
 import {
   Package,
   Truck,
@@ -10,7 +10,7 @@ import {
   AlertCircle,
   XSquareIcon,
 } from "lucide-react";
-import { getOrder } from "@/actions/orders/getOrder";
+import { getOrder } from "../../actions/orders/getOrder";
 import { useRouter } from "next/navigation";
 
 interface Product {

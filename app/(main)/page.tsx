@@ -1,16 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 import { ArrowRight } from "lucide-react";
 
 import { useState, useEffect } from "react";
 
-import { getCatalogWithProducts } from "@/actions/catalog/getCatalogWithProducts";
+import { getCatalogWithProducts } from "../actions/catalog/getCatalogWithProducts";
 
-import ProductCatalog from "@/components/ProductCatalog";
+import ProductCatalog from "../components/ProductCatalog";
 
-import { ICatalog } from "@/types/catalog";
+import { ICatalog } from "../types/catalog";
 
 import Image from "next/image";
 

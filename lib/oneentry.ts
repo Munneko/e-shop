@@ -1,6 +1,6 @@
 import { defineOneEntry } from "oneentry";
-import retrieveRefreshToken from "@/actions/auth/retrieveRefreshToken";
-import storeRefreshToken from "@/actions/auth/storeRefreshToken";
+import retrieveRefreshToken from "../actions/auth/retrieveRefreshToken";
+import storeRefreshToken from "../actions/auth/storeRefreshToken";
 
 export async function fetchApiClient() {
   const apiUrl = process.env.ONEENTRY_URL;

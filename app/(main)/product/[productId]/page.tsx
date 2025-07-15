@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import useCartStore from "@/stores/cartStore";
-import { getProductDetails } from "@/actions/catalog/getProductDetails";
-import ProductCatalog from "@/components/ProductCatalog";
-import { getRelatedProducts } from "@/actions/catalog/getRelatedProducts";
+import { Button } from "../../../components/ui/button";
+import useCartStore from "../../../stores/cartStore";
+import { getProductDetails } from "../../../actions/catalog/getProductDetails";
+import ProductCatalog from "../../../components/ProductCatalog";
+import { getRelatedProducts } from "../../../actions/catalog/getRelatedProducts";
 import { toast } from "sonner";
-import { IProduct } from "@/types/product";
+import { IProduct } from "../../../types/product";
 import Image from "next/image";
 
 export default function ProductDetailPage({

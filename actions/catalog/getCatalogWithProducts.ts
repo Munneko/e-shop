@@ -2,7 +2,7 @@
 
 import { IPagesEntity } from "oneentry/dist/pages/pagesInterfaces";
 
-import { fetchApiClient } from "@/lib/oneentry";
+import { fetchApiClient } from "../lib/oneentry";
 
 import { getCatalogs } from "./getCatalog";
 

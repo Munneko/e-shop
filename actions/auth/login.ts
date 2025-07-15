@@ -1,10 +1,10 @@
 "use server";
 
 import { IAttributes } from "oneentry/dist/base/utils";
-import { fetchApiClient } from "@/lib/oneentry";
+import { fetchApiClient } from "../lib/oneentry";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { isErrorWithMessage } from "@/lib/utils";
+import { isErrorWithMessage } from "../lib/utils";
 
 interface IErroredResponse {
   statusCode: number;

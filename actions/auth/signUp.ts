@@ -1,9 +1,9 @@
 "use server";
 
 import { IAttributes } from "oneentry/dist/base/utils";
-import { fetchApiClient } from "@/lib/oneentry";
+import { fetchApiClient } from "../lib/oneentry";
 import { ISignUpData } from "oneentry/dist/auth-provider/authProvidersInterfaces";
-import { isErrorWithMessage } from "@/lib/utils";
+import { isErrorWithMessage } from "../lib/utils";
 
 export const getSignupFormData = async (): Promise<IAttributes[]> => {
   try {

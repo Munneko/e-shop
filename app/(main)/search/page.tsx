@@ -2,11 +2,11 @@
 
 import { useState, useEffect, Suspense } from "react";
 
-import { searchProductsAction } from "@/actions/catalog/searchProducts";
+import { searchProductsAction } from "../../../actions/catalog/searchProducts";
 import { useSearchParams } from "next/navigation";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "../../../components/ProductCard";
 import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
-import { IProduct } from "@/types/product";
+import { IProduct } from "../../../types/product";
 
 function SearchComponent() {
   const [isLoading, setIsLoading] = useState(true);

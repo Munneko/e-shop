@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import { persist } from "zustand/middleware";
 
-interface CartItem {
+export interface CartItem {
   id: number;
 
   name: string;
@@ -14,7 +14,7 @@ interface CartItem {
   image: string;
 }
 
-interface CartState {
+export interface CartState {
   cart: CartItem[];
 
   addToCart: (item: CartItem) => void;

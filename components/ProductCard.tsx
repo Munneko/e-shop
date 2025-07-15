@@ -6,11 +6,11 @@ import { ShoppingCart } from "lucide-react";
 
 import { Button } from "./ui/button";
 
-import { IProduct } from "@/types/product";
+import { IProduct } from "../types/product";
 
 import Image from "next/image";
 
-import useCartStore from "@/stores/cartStore";
+import useCartStore from "../stores/cartStore";
 
 import { toast } from "sonner";
 

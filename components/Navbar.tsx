@@ -4,9 +4,9 @@ import { useState, useEffect, useRef } from "react";
 
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "./ui/input";
 
 import { ShoppingCart, User, Menu, X, LogOut } from "lucide-react";
 
@@ -17,19 +17,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 
-import getUserSession from "@/actions/auth/getUserSession";
+import getUserSession from "../actions/auth/getUserSession";
 
-import logoutAction from "@/actions/auth/logout";
+import logoutAction from "../actions/auth/logout";
 
 import { useRouter } from "next/navigation";
 
 import { IUserEntity } from "oneentry/dist/users/usersInterfaces";
 
-import useCartStore from "@/stores/cartStore";
+import useCartStore from "../stores/cartStore";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

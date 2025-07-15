@@ -1,16 +1,18 @@
 "use client";
 
+import { Suspense } from "react";
+
 import { useState, useEffect, FormEvent } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import { toast } from "sonner";
 
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getSignupFormData, handleSignupSubmit } from "@/actions/auth/signup";
-import { getLoginFormData, handleLoginSubmit } from "@/actions/auth/login";
+import { getSignupFormData, handleSignupSubmit } from "../../actions/auth/signup";
+import { getLoginFormData, handleLoginSubmit } from "../../actions/auth/login";
 
 import { IAttributes } from "oneentry/dist/base/utils";
 
@@ -27,7 +29,7 @@ interface LoginFormData {
 
   password: string;
 }
-export default function AuthPage() {
+function AuthPageInner() {
   const [isSignUp, setIsSignUp] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -219,5 +221,13 @@ export default function AuthPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthPageInner />
+    </Suspense>
   );
 }

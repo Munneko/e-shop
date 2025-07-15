@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../components/ui/button";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "../../../components/ui/input";
 
 import {
   ShoppingCart,
@@ -17,13 +17,14 @@ import {
 
 import { useRouter } from "next/navigation";
 
-import useCartStore from "@/stores/cartStore";
+import useCartStore from "../../../stores/cartStore";
+import type { CartState, CartItem } from "../../../stores/cartStore";
 
-import getUserSession from "@/actions/auth/getUserSession";
+import getUserSession from "../../../actions/auth/getUserSession";
 
 import { IUserEntity } from "oneentry/dist/users/usersInterfaces";
 
-import createOrder from "@/actions/orders/createOrder";
+import createOrder from "../../../actions/orders/createOrder";
 
 import { IOrderData } from "oneentry/dist/orders/ordersInterfaces";
 
@@ -31,10 +32,10 @@ import Image from "next/image";
 
 export default function CartPage() {
   const router = useRouter();
-  const cartItems = useCartStore((state) => state.cart);
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const removeItem = useCartStore((state) => state.removeItem);
-  const clearCart = useCartStore((state) => state.clearCart);
+  const cartItems = useCartStore((state: CartState) => state.cart);
+  const updateQuantity = useCartStore((state: CartState) => state.updateQuantity);
+  const removeItem = useCartStore((state: CartState) => state.removeItem);
+  const clearCart = useCartStore((state: CartState) => state.clearCart);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<IUserEntity | null>(null);
 
@@ -76,7 +77,7 @@ export default function CartPage() {
   }, []);
 
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum: number, item: CartItem) => sum + item.price * item.quantity,
     0
   );
   const discountAmount = subtotal * discount;
@@ -118,7 +119,7 @@ export default function CartPage() {
         ) : (
           <>
             <div>
-              {cartItems.map((item) => (
+              {cartItems.map((item: CartItem) => (
                 <div
                   key={item.id}
                   className=" p-4 sm:p-6 rounded-lg shadow-lg mb-4 relative overflow-hidden border-2 border-gray-200"
@@ -157,7 +158,7 @@ export default function CartPage() {
                           type="number"
                           min="0"
                           value={item.quantity}
-                          onChange={(e) =>
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             updateQuantity(item.id, parseInt(e.target.value))
                           }
                           className="w-16  border-gray-600 text-center bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent"
@@ -199,7 +200,7 @@ export default function CartPage() {
                   id="promo"
                   type="text"
                   value={promo}
-                  onChange={(e) => setPromo(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPromo(e.target.value)}
                   placeholder="Enter promo code"
                   className="flex-1 text-base sm:text-lg p-4 sm:p-6 rounded-md border-2 border-gray-200 focus:border-purple-500 focus:ring-0 bg-white"
                 />

@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchApiClient } from "@/lib/oneentry";
+import { fetchApiClient } from "../lib/oneentry";
 
 interface SearchParams {
   query: string;
