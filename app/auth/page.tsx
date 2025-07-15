@@ -11,7 +11,10 @@ import { toast } from "sonner";
 
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getSignupFormData, handleSignupSubmit } from "../../actions/auth/signup";
+import {
+  getSignupFormData,
+  handleSignupSubmit,
+} from "../../actions/auth/signUp";
 import { getLoginFormData, handleLoginSubmit } from "../../actions/auth/login";
 
 import { IAttributes } from "oneentry/dist/base/utils";
